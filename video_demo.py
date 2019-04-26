@@ -2,7 +2,7 @@ import cv2 as cv
 
 
 def video_demo():
-    capture = cv.VideoCapture("D:/Programming Workspace/PyCharm/DigitalImageProcessing/res/pre-demo.mp4")
+    capture = cv.VideoCapture("res/pre-demo.mp4")
     flip = False
     while True:
         ret, frame = capture.read()

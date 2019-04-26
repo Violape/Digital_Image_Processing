@@ -3,7 +3,7 @@ import numpy as np
 
 
 def show_image():
-    src = cv.imread("D:/Programming Workspace/PyCharm/DigitalImageProcessing/res/Badge-01.png")
+    src = cv.imread("res/Badge-01.png")
     cv.namedWindow("Image", cv.WINDOW_AUTOSIZE)
     cv.imshow("Image", src)
     get_image_info(src)
@@ -23,6 +23,6 @@ def get_image_info(image):
 
 def change_gray(src):
     gray = cv.cvtColor(src, cv.COLOR_BGR2GRAY)
-    cv.imwrite("D:/Programming Workspace/PyCharm/DigitalImageProcessing/res/result.png", gray)
+    cv.imwrite("res/result.png", gray)
     cv.waitKey(0)
     cv.destroyAllWindows()
