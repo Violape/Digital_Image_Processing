@@ -19,3 +19,11 @@ def exp1():  # 负像变换
     cv2.imshow('Original Film', src)
     cv2.imshow('Negative Film', dst)
     cv2.waitKey(0)
+    '''
+    更简单的方法----直接使用255减得到负片
+    src = cv2.imread('res/moon.tif')
+    dst = 255 - src
+    cv2.imshow('Original Film', src)
+    cv2.imshow('Negative Film', dst)
+    cv2.waitKey(0)
+    '''
