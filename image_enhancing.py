@@ -7,6 +7,7 @@ def image_enhancement():
     # exp1()
     # exp2()
     exp3()
+    exp4()
 
 
 def exp1():  # 负像变换
@@ -79,5 +80,14 @@ def exp3():  # 邻域平均
     cv2.imshow('Original Film', src)
     cv2.imshow("Blur range=3", dst3)
     cv2.imshow("Blur range=7", dst7)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
+def exp4():  # 中值平均
+    src = cv2.imread('res/moon.tif')
+    dst = cv2.medianBlur(src, 3)
+    cv2.imshow('Original Film', src)
+    cv2.imshow("Median range=3", dst)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
