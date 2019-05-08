@@ -6,8 +6,9 @@ import numpy as np
 def image_enhancement():
     # exp1()
     # exp2()
-    exp3()
-    exp4()
+    # exp3()
+    # exp4()
+    exp5()
 
 
 def exp1():  # 负像变换
@@ -89,5 +90,20 @@ def exp4():  # 中值平均
     dst = cv2.medianBlur(src, 3)
     cv2.imshow('Original Film', src)
     cv2.imshow("Median range=3", dst)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
+def exp5():  # Laplace 锐化
+    src = cv2.imread('res/moon.tif')
+    weight = src.shape[0]
+    height = src.shape[1]
+    t1 = list([[0, 1, 0], [1, -4, 1], [0, 1, 0]])  # Laplace 滤波器
+    dst = np.pad(src, ((1, 1), (1, 1), (0, 0)), "constant", constant_values=0)  # 边界问题处理
+    for i in range(1, weight - 1):
+        for j in range(1, height - 1):
+            dst[i, j] = abs(np.sum(dst[i: i + 3, j:j + 3] * t1))
+    cv2.imshow('Original Film', src)
+    cv2.imshow("Laplace Sharpening", src + dst[1:dst.shape[0] - 1, 1:dst.shape[1] - 1])  # 滤波加成
     cv2.waitKey(0)
     cv2.destroyAllWindows()
