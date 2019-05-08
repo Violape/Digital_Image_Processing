@@ -8,8 +8,8 @@ def image_enhancement():
     # exp2()
     # exp3()
     # exp4()
-    exp5()
-
+    # exp5()
+    exp6()
 
 def exp1():  # 负像变换
     src = cv2.imread('res/moon.tif')
@@ -105,5 +105,14 @@ def exp5():  # Laplace 锐化
             dst[i, j] = abs(np.sum(dst[i: i + 3, j:j + 3] * t1))
     cv2.imshow('Original Film', src)
     cv2.imshow("Laplace Sharpening", src + dst[1:dst.shape[0] - 1, 1:dst.shape[1] - 1])  # 滤波加成
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
+def exp6():  # Equalized Hist
+    src = cv2.imread('res/moon.tif', 0)
+    dst = cv2.equalizeHist(src)
+    cv2.imshow("Original Film", src)
+    cv2.imshow("Equalized Hist", dst)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
