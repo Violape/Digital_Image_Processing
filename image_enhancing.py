@@ -4,33 +4,18 @@ import numpy as np
 
 
 def image_enhancement():
-    exp1()
-    exp2()
+    # exp1()
+    # exp2()
+    exp3()
 
 
 def exp1():  # 负像变换
-    src = cv2.imread('res/moon.tif')
-    img_info = src.shape
-    h = img_info[0]
-    w = img_info[1]
-    dst = np.zeros((h, w, 3), np.uint8)
-    for i in range(h):
-        for j in range(w):
-            (b, g, r) = src[i][j]
-            dst[i][j] = (255 - b, 255 - g, 255 - r)
-    cv2.imshow('Original Film', src)
-    cv2.imshow('Negative Film', dst)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-    '''
-    更简单的方法----直接使用255减得到负片
     src = cv2.imread('res/moon.tif')
     dst = 255 - src
     cv2.imshow('Original Film', src)
     cv2.imshow('Negative Film', dst)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    '''
 
 
 def exp2():  # 线性非对称变换
@@ -83,5 +68,16 @@ def exp2():  # 线性非对称变换
     cv2.imshow('Gamma Film γ=1, c=1', dst1)
     cv2.imshow('Gamma Film γ=0.2, c=1', dst2)
     cv2.imshow('Gamma Film γ=5, c=1', dst5)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
+def exp3():  # 邻域平均
+    src = cv2.imread('res/moon.tif')
+    dst3 = cv2.blur(src, (3, 3))
+    dst7 = cv2.blur(src, (7, 7))
+    cv2.imshow('Original Film', src)
+    cv2.imshow("Blur range=3", dst3)
+    cv2.imshow("Blur range=7", dst7)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
