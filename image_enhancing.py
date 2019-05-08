@@ -4,18 +4,19 @@ import numpy as np
 
 
 def image_enhancement():
-    # exp1()
-    # exp2()
-    # exp3()
-    # exp4()
-    # exp5()
+    exp1()
+    exp2()
+    exp3()
+    exp4()
+    exp5()
     exp6()
+
 
 def exp1():  # 负像变换
     src = cv2.imread('res/moon.tif')
     dst = 255 - src
-    cv2.imshow('Original Film', src)
-    cv2.imshow('Negative Film', dst)
+    res = np.hstack((src, dst))
+    cv2.imshow('Negative conversion', res)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
@@ -35,16 +36,8 @@ def exp2():  # 线性非对称变换
                 dst1[i, j, k] = 1.0 * math.log(1.0 + src[i, j, k])
                 dst2[i, j, k] = 0.2 * math.log(1.0 + src[i, j, k])
                 dst5[i, j, k] = 5.0 * math.log(1.0 + src[i, j, k])
-    cv2.normalize(dst1, dst1, 0, 255, cv2.NORM_MINMAX)
-    dst1 = cv2.convertScaleAbs(dst1)
-    cv2.normalize(dst2, dst2, 0, 255, cv2.NORM_MINMAX)
-    dst2 = cv2.convertScaleAbs(dst2)
-    cv2.normalize(dst5, dst5, 0, 255, cv2.NORM_MINMAX)
-    dst5 = cv2.convertScaleAbs(dst5)
-    cv2.imshow('Original Film', src)
-    cv2.imshow('Log Film c=1', dst1)
-    cv2.imshow('Log Film c=0.2', dst2)
-    cv2.imshow('Log Film c=5', dst5)
+    res = np.hstack((src, dst1, dst2, dst5))
+    cv2.imshow('Log conversion (o, c=1, c=0.2, c=5)', res)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
     # 指数变换
@@ -66,10 +59,8 @@ def exp2():  # 线性非对称变换
     dst2 = cv2.convertScaleAbs(dst2)
     cv2.normalize(dst5, dst5, 0, 255, cv2.NORM_MINMAX)
     dst5 = cv2.convertScaleAbs(dst5)
-    cv2.imshow('Original Film', src)
-    cv2.imshow('Gamma Film γ=1, c=1', dst1)
-    cv2.imshow('Gamma Film γ=0.2, c=1', dst2)
-    cv2.imshow('Gamma Film γ=5, c=1', dst5)
+    res = np.hstack((src, dst1, dst2, dst5))
+    cv2.imshow('Gamma conversion (o, γ=1, γ=0.2, γ=5)', res)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
@@ -78,18 +69,18 @@ def exp3():  # 邻域平均
     src = cv2.imread('res/moon.tif')
     dst3 = cv2.blur(src, (3, 3))
     dst7 = cv2.blur(src, (7, 7))
-    cv2.imshow('Original Film', src)
-    cv2.imshow("Blur range=3", dst3)
-    cv2.imshow("Blur range=7", dst7)
+    res = np.hstack((src, dst3, dst7))
+    cv2.imshow('Adjacent average conversion (o, 3x3, 7x7)', res)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
 
 def exp4():  # 中值平均
     src = cv2.imread('res/moon.tif')
-    dst = cv2.medianBlur(src, 3)
-    cv2.imshow('Original Film', src)
-    cv2.imshow("Median range=3", dst)
+    dst3 = cv2.medianBlur(src, 3)
+    dst7 = cv2.medianBlur(src, 7)
+    res = np.hstack((src, dst3, dst7))
+    cv2.imshow('Median average conversion (o, 3x3, 7x7)', res)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
@@ -103,8 +94,9 @@ def exp5():  # Laplace 锐化
     for i in range(1, weight - 1):
         for j in range(1, height - 1):
             dst[i, j] = abs(np.sum(dst[i: i + 3, j:j + 3] * t1))
-    cv2.imshow('Original Film', src)
-    cv2.imshow("Laplace Sharpening", src + dst[1:dst.shape[0] - 1, 1:dst.shape[1] - 1])  # 滤波加成
+    dst = src + dst[1:dst.shape[0] - 1, 1:dst.shape[1] - 1]  # 滤波加成
+    res = np.hstack((src, dst))
+    cv2.imshow('Laplace conversion', res)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
@@ -112,7 +104,7 @@ def exp5():  # Laplace 锐化
 def exp6():  # Equalized Hist
     src = cv2.imread('res/moon.tif', 0)
     dst = cv2.equalizeHist(src)
-    cv2.imshow("Original Film", src)
-    cv2.imshow("Equalized Hist", dst)
+    res = np.hstack((src, dst))
+    cv2.imshow('Equalized Hist', res)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
