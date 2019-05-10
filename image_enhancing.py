@@ -3,16 +3,17 @@ import math
 import numpy as np
 from matplotlib import pyplot as plt
 
+
 def image_enhancement():
-    # exp1('res/moon.tif')
-    # exp1('res/fruits.bmp')
-    # exp2('res/moon.tif')
-    # exp3('res/moon.tif')
-    # exp3('res/fruits.bmp')
-    # exp4('res/moon.tif')
-    # exp4('res/fruits.bmp')
-    # exp5('res/moon.tif')
-    # exp5('res/fruits.bmp')
+    exp1('res/moon.tif')
+    exp1('res/fruits.bmp')
+    exp2('res/moon.tif')
+    exp3('res/moon.tif')
+    exp3('res/fruits.bmp')
+    exp4('res/moon.tif')
+    exp4('res/fruits.bmp')
+    exp5('res/moon.tif')
+    exp5('res/fruits.bmp')
     exp6('res/moon.tif')
     exp6('res/fruits.bmp')
 
